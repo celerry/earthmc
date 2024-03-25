@@ -1,0 +1,21 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "bun.lockb": true,
+        "node_modules": true
+    },
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "prettier.semi": false,
+    "typescript.preferences.quoteStyle": "double",
+    "typescript.preferences.importModuleSpecifierEnding": "minimal",
+    "[typescript]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "always"
+        }
+    }
+}
