@@ -1,0 +1,18 @@
+{
+  "name": "earthmc",
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "eslint": "^8.57.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "dev": "bun run --hot src/index.ts",
+    "fmt": "bun x prettier --write \"**/*.ts\""
+  },
+  "type": "module"
+}
