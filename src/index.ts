@@ -280,15 +280,15 @@ export class EarthMC {
     }
 
     /**
-     * retrieves all quarters uuids
-     * @returns a promise resolving an array of every quarters' uuid
+     * retrieves all quarters uuids and names
+     * @returns a promise resolving an array of every quarters' uuid and name
      */
-    public async quarters(): Promise<UUID[]> {
+    public async quarters(): Promise<NamedObject[]> {
         const url = new URL(`${this.BASE_URL}/${this.serverStr}/quarters`)
 
         const response: Response = await this.get(url)
 
-        return (await response.json()) as UUID[]
+        return (await response.json()) as NamedObject[]
     }
 
     /**
