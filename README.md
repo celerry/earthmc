@@ -1,5 +1,13 @@
 # EarthMC API Wrapper
 
+
+## Installation
+
+See the [package on JSR](https://jsr.io/@celery/earthmc).
+
+
+## Example Usage
+
 ```ts
 import { EarthMC } from "@celery/earthmc";
 
