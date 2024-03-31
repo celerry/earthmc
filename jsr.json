@@ -1,11 +1,12 @@
 {
     "name": "@celery/earthmc",
-    "version": "1.1.0",
+    "version": "1.1.0a",
     "exports": "./src/index.ts",
     "publish": {
         "include": [
             "src/**/*.ts",
-            "jsr.json"
+            "jsr.json",
+            "README.md"
         ]
     }
 }
