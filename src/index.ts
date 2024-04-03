@@ -7,7 +7,7 @@ import { URL } from "node:url"
  * ```ts
  * import { EarthMC } from "@celery/earthmc";
  *
- * const api = new EarthMC()
+ * const api = new EarthMC({ name: "foo" })
  *
  * const players = await api.players() // [{ uuid:  ... , name: ... }, ...]
  * const town = await api.town(players[0].town.uuid) // [{ board: ... , ... }]
@@ -20,7 +20,7 @@ import { URL } from "node:url"
  * ```ts
  * import { EarthMC } from "@celery/earthmc";
  *
- * const api = new EarthMC()
+ * const api = new EarthMC({ name: "foo" })
  *
  * const players = await api.players() // [{ uuid:  ... , name: ... }, ...]
  * const town = await api.town(players[0].town.uuid) // [{ board: ... , ... }]
@@ -38,6 +38,11 @@ export class EarthMC {
      * The server we are checking against
      */
     private serverStr: string
+
+    /** 
+     * Used in User Agent header
+     */
+    private name: string
 
     /**
      * represents a queue of request timestamps used for rate limiting
@@ -63,14 +68,16 @@ export class EarthMC {
 
     /**
      * @param {object} [options] - options for rate limiting
+     * @param {string} [options.name]
      * @param {string} [options.server=aurora] - the server we are checking against
      * @param {number} [options.maxRequestsPerWindow=Number.MAX_SAFE_INTEGER] - maximum number of requests allowed within the specified time window
      * @param {number} [options.windowSize=300000] - time window in milliseconds
      */
-    constructor(options?: { server?: string; maxRequestsPerWindow?: number; windowSize?: number }) {
+    constructor(options: { name: string; server?: string; maxRequestsPerWindow?: number; windowSize?: number }) {
+        this.name = options.name
         this.serverStr = "aurora"
-        this.maxRequestsPerWindow = options?.maxRequestsPerWindow ?? Number.MAX_SAFE_INTEGER // default: unlimited
-        this.windowSize = options?.windowSize ?? 300000 // default: 5 minutes (300,000 milliseconds)
+        this.maxRequestsPerWindow = options.maxRequestsPerWindow ?? Number.MAX_SAFE_INTEGER // default: unlimited
+        this.windowSize = options.windowSize ?? 300000 // default: 5 minutes (300,000 milliseconds)
     }
 
     /**
@@ -86,7 +93,7 @@ export class EarthMC {
         try {
             const response = await fetch(url.toString(), {
                 headers: {
-                    "X-Origin": `celerry`,
+                    "X-Origin": `EarthMC JSR Client/1.1.2, ${this.name}`,
                 },
             })
 
